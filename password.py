@@ -1,42 +1,51 @@
 from string import ascii_letters, punctuation
 from generator_class import Generate_Password
+import re
 
 
 def answer_size():
-    print('[\033[1;31mERROR\033[0;0m] MINIMUM SIZE OF 8 CHARACTERS AND MAXIMUM OF 40:')
+    print('[\033[1;31mError\033[0;0m] Minium size of 8 characters and maximum of 40:')
 
 def answer_letter():
-    print('[\033[1;31mERROR\033[0;0m] NO LETTERS, SYMBOLS OR BLANK SPACES ALLOWED:]\033[0;0m   ')
+    print('[\033[1;31mError\033[0;0m] No letters, symbols or blank spaces allowed:]\033[0;0m   ')
+
 
 def option():
-    answer = input('''
-    \033[1;31mPASSWORD STRENGTH OPTIONS:\033[0;0m
-              
-    [  1 ] CAPITAL LETTERS + SMALL LETTERS + NUMBERS 
-    [  2 ] CAPITAL LETTERS + SMALL LETTERS + SYMBOLS
-    [  3 ] CAPITAL LETTERS + SMALL LETTERS
-    [  4 ] CAPITAL LETTERS  
-    [  5 ] NUMBERS + SYMBOLS + CAPITAL LETTERS
-    [  6 ] NUMBERS + SYMBOLS + SMALL LETTERS
-    [  7 ] NUMBERS + SYMBOLS
-    [  8 ] NUMEROS + CAPITL LETTERS
-    [  9 ] NUMEROS + SMALL LETTERS
-    [ 10 ] SYMBOLS + CAPITL LETTERS
-    [ 11 ] SYMBOLS + SMALL LETTERS
-    [ 12 ] ALL VALUES
-    [ 13 ] SYMBOLS
-    
+    while True:
+        answer = input('''
+            \033[1;31mPassword strength options:\033[0;0m
+            
+                    
+            [  1 ] ABC + abc + 123 
+            [  2 ] ABC + abc + #$&
+            [  3 ] ABC + abc
+            [  4 ] ABC  
+            [  5 ] 123 + #$& + ABC
+            [  6 ] 123 + #$& + abc
+            [  7 ] 123 + #$&
+            [  8 ] 123 + ABC
+            [  9 ] 123 + abc
+            [ 10 ] 123           
+            [ 11 ] #$& + ABC
+            [ 12 ] #$& + abc
+            [ 13 ] #$&
+            [ 14 ] ABC + abc + 123 + #$& 
+            
+                        
     ''')
 
-    return answer
-
+        if answer.isdigit():
+            answer = int(answer)
+            if 1 <= answer <= 14:
+                return answer
+    
 
 size = 0
 numbers = ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26','27', '28', '29', '30','31','32','33','34','35','36','37','38','39','40',8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
 
 
 while not size in numbers:
-    size = input('PASSWORD LENGTH: ')
+    size = input('Password length: ')
     if size in ascii_letters or size in punctuation:
         answer_letter()
     elif size not in numbers:
@@ -47,19 +56,59 @@ while not size in numbers:
 
 instance = option()
 
-esc_number = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+
+esc_number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
 
 def end(): 
     if type(size) is int and size >= 8 and size <= 40:
         if instance in esc_number:
             arg = instance
             tam_ger = Generate_Password(size, arg)
-            return tam_ger.full()
+            return tam_ger.full()            
 
-# with instance object "atual" of function end() i will to do a condition  
+
+def verify8():
+
+    if re.search(r'\d{8,9}',current_pass):
+        print(f'[\033[1;31mWeak\033[0;0m] {current_pass}')
+    elif re.search(r'[`;!@#\$%\^&*(),.?":{}|<>a-zA-Z0123456789]', current_pass):
+        print(f'[\033[33mAverage\033[0;0m] {current_pass}')
+
+
+def verify10():
+
+    if re.search(r'\d{10,11}',current_pass):
+        print((f'[\033[33mAverage\033[0;0m] {current_pass}'))
+    elif re.search(r'[`;!@#\$%\^&*(),.?":{}|<>a-zA-Z0123456789]', current_pass):
+        print(f'[\033[32mStrong\033[0;0m] {current_pass}')
+
+
+def verify12():
+
+    if re.search(r'\d{12,13}',current_pass):
+        print((f'[\033[32mStrong\033[0;0m] {current_pass}'))
+    elif re.search(r'[`;!@#\$%\^&*(),.?":{}|<>a-zA-Z0123456789]', current_pass):
+        print(f'[\033[34mVery strong\033[0;0m] {current_pass}')
+
+
+def verify13plus():
+
+    if re.search(r'[`;!@#\$%\^&*(),.?":{}|<>a-zA-Z0123456789]', current_pass):
+        print(f'[\033[34mVery strong\033[0;0m] {current_pass}')
+    
+
 current_pass = end()
 
-def strong_pass():
-    pass
-    
-    
+
+if len(current_pass) in range(8,11):
+    verify8()
+
+elif len(current_pass) in range(10,12):
+    verify10()
+
+elif len(current_pass) in range(12,14):
+    verify12()
+
+elif len(current_pass) in range(14, 41):
+    verify13plus()
