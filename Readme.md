@@ -4,6 +4,8 @@
 
 <p align="center">
 
+<!-- aqui vai os budget-->
+
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
 </p>
@@ -13,13 +15,12 @@ Este projeto é pessoal, porém ele busca realizar a nivel de linha de comando u
 
 <h4 align="center">
 
-    :construction: Projeto em construção :construction:
 
 </h4>
 
 # :hammer: Funcionalidade
 
-- `Funcionalidade exemplo`: É possível expecificar qual grau de força de senha baseado nas combinações possíveis de caracteres
+- `Funcionalidade exemplo` É possível expecificar qual grau de força de senha baseado nas combinações possíveis de caracteres
 
 <h1 align="center">
 
