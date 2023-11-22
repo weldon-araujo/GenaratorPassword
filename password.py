@@ -1,6 +1,7 @@
 from string import ascii_letters, punctuation
 from generator_class import Generate_Password
 import re
+import pyperclip
 
 
 def answer_size():
@@ -112,3 +113,10 @@ elif len(current_pass) in range(12,14):
 
 elif len(current_pass) in range(14, 41):
     verify13plus()
+
+issue = input('Do you want to copy password to transfer area ? digit [y] if yes ').lower()
+
+if issue == 'y':
+
+    pyperclip.copy(current_pass)
+    print('Password copied')
